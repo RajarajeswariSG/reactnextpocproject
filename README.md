@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Entity Search
 
-## Getting Started
+A Next.js App Router implementation of a responsive entity search workflow using React, TypeScript, Tailwind CSS, and Lucide React.
 
-First, run the development server:
+## Run Locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000/entity-search](http://localhost:3000/entity-search).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Architecture
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The feature follows this dependency direction:
 
-## Learn More
+```text
+UI Components -> useEntitySearch -> entityService -> Backend API
+```
 
-To learn more about Next.js, take a look at the following resources:
+The backend integration is currently isolated behind a typed mock implementation in `src/services/entityService.ts`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+For the code-level diagrams, request sequence, hook state machine, component contracts, and backend replacement guidance, read the [Entity Search Architecture](docs/entity-search-architecture.md) guide.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+For a step-by-step beginner walkthrough, read the [Beginner Development Guide](docs/beginner-development-guide.md). It explains the build order, each file's purpose, the React state flow, debugging method, and practice exercises.
 
-## Deploy on Vercel
+The presentation-ready editable deck is [Entity-Search-React-Architecture.pptx](docs/Entity-Search-React-Architecture.pptx). Regenerate it with:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+node scripts/generate-architecture-ppt.js
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+```text
+src/
+├── app/
+│   └── entity-search/page.tsx
+├── components/
+│   ├── layout/
+│   └── entity-search/
+├── hooks/
+│   └── useEntitySearch.ts
+├── services/
+│   └── entityService.ts
+├── types/
+│   └── entity.ts
+└── constants/
+	└── navigation.ts
+```
+
+## Commands
+
+```bash
+npm run dev      # Start the development server
+npm run lint     # Run ESLint
+npm run build    # Create a production build
+node scripts/generate-architecture-ppt.js # Regenerate the architecture deck
+```
